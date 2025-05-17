@@ -13,7 +13,7 @@ BASE_URL = "http://api.aviationstack.com/v1"
 def hello():
     return "✅ Flask API is running!"
 
-  @app.route("/")
+@app.route("/")
 def homepage():
     return render_template("flight.html")
   
