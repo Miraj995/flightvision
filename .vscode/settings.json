@@ -1,9 +1,0 @@
-{
-  "java.project.referencedLibraries": [
-    "lib/json-20231013.jar",
-    "lib/dotenv-java.jar"
-  ],
-  "java.project.sourcePaths": [
-    "java-launcher"
-  ]
-}
