@@ -1,19 +1,14 @@
 from flask import Flask, jsonify, render_template
 import requests
 import os
-import threading
-import time
 from dotenv import load_dotenv
 from datetime import datetime
-
 
 load_dotenv()
 app = Flask(__name__)
 
 KEY = os.getenv("AVIATIONSTACK_KEY")
 BASE_URL = "http://api.aviationstack.com/v1"
-UPDATE_INTERVAL = 43200  # 12 hours in seconds
-
 
 cached_data = {
     "arrivals": {},
@@ -27,7 +22,18 @@ def hello():
 
 @app.route("/view")
 def homepage():
-    return render_template("flight.html", data=cached_data)
+    flights = []
+    for icao, data in cached_data["arrivals"].items():
+        for item in data.get("data", []):
+            flights.append({
+                "flight": item.get("flight", {}).get("iata", "Unknown"),
+                "departure": item.get("departure", {}).get("airport", "Unknown"),
+                "arrival": item.get("arrival", {}).get("airport", "Unknown"),
+                "status": item.get("flight_status", "Unknown"),
+                "gate": item.get("arrival", {}).get("gate", "N/A")
+            })
+    return render_template("flight.html", flights=flights)
+
 
 @app.route("/arrivals/<string:icao>")
 def get_arrivals(icao):
@@ -43,14 +49,9 @@ def get_belt_info(icao):
 
 @app.route("/refresh")
 def manual_refresh():
-    threading.Thread(target=update_cache, daemon=True).start()
-    return jsonify({"message": "🔁 Manual cache update triggered", "time": str(datetime.now())})
+    print("🔄 Starting cache refresh...")
 
-
-
-def update_cache():
-    print("🔁 Starting cache refresh...")
-    for icao in ["VABB"]:  # Add more ICAOs as needed
+    for icao in ["VABB"]:  # Extend this list if needed
         try:
             arrivals_url = f"{BASE_URL}/flights?access_key={KEY}&arr_icao={icao}"
             departures_url = f"{BASE_URL}/flights?access_key={KEY}&dep_icao={icao}"
@@ -69,10 +70,10 @@ def update_cache():
             cached_data["departures"][icao] = departures_response
             cached_data["belt"][icao] = {"belt_info": belt_data}
 
-            print(f"✅ Cache updated for {icao} at {datetime.now()}")
         except Exception as e:
-            print(f"❌ Failed to update cache for {icao}: {e}")
+            print(f"❌ Error updating cache for {icao}: {e}")
+
+    return jsonify({"message": "✅ Manual cache update triggered", "time": str(datetime.now())})
 
 if __name__ == "__main__":
-    threading.Thread(target=update_cache, daemon=True).start()
     app.run(host="0.0.0.0", port=5001)
