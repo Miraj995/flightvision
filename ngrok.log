@@ -1,0 +1,127 @@
+t=2025-05-16T20:12:30+0530 lvl=info msg="no configuration paths supplied"
+t=2025-05-16T20:12:30+0530 lvl=info msg="using configuration at default config path" path=/home/miraj-raha/.config/ngrok/ngrok.yml
+t=2025-05-16T20:12:30+0530 lvl=info msg="open config file" path=/home/miraj-raha/.config/ngrok/ngrok.yml err=nil
+t=2025-05-16T20:12:30+0530 lvl=info msg="starting web service" obj=web addr=127.0.0.1:4040 allow_hosts=[]
+t=2025-05-16T20:12:31+0530 lvl=info msg="client session established" obj=tunnels.session
+t=2025-05-16T20:12:31+0530 lvl=info msg="tunnel session started" obj=tunnels.session
+t=2025-05-16T20:12:31+0530 lvl=info msg="started tunnel" obj=tunnels name=command_line addr=http://localhost:5001 url=https://e88c-2405-201-8019-2136-d8b2-6b38-7edd-ecd0.ngrok-free.app
+t=2025-05-16T20:12:35+0530 lvl=info msg=start pg=/api/tunnels id=611a2a7695410c7a
+t=2025-05-16T20:12:35+0530 lvl=info msg=end pg=/api/tunnels id=611a2a7695410c7a status=200 dur=351.369µs
+t=2025-05-16T20:18:14+0530 lvl=info msg="join connections" obj=join id=4955d2f2c452 l=127.0.0.1:5001 r=[2405:201:8019:2136:d8b2:6b38:7edd:ecd0]:44144
+t=2025-05-16T20:18:15+0530 lvl=info msg="join connections" obj=join id=df66eb1d45e9 l=127.0.0.1:5001 r=[2405:201:8019:2136:d8b2:6b38:7edd:ecd0]:44144
+t=2025-05-16T20:21:24+0530 lvl=info msg="no configuration paths supplied"
+t=2025-05-16T20:21:24+0530 lvl=info msg="using configuration at default config path" path=/home/miraj-raha/.config/ngrok/ngrok.yml
+t=2025-05-16T20:21:24+0530 lvl=info msg="open config file" path=/home/miraj-raha/.config/ngrok/ngrok.yml err=nil
+t=2025-05-16T20:21:24+0530 lvl=info msg="starting web service" obj=web addr=127.0.0.1:4040 allow_hosts=[]
+t=2025-05-16T20:21:25+0530 lvl=info msg="client session established" obj=tunnels.session
+t=2025-05-16T20:21:25+0530 lvl=info msg="tunnel session started" obj=tunnels.session
+t=2025-05-16T20:21:25+0530 lvl=info msg="started tunnel" obj=tunnels name=command_line addr=http://localhost:5001 url=https://6ed1-2405-201-8019-2136-d8b2-6b38-7edd-ecd0.ngrok-free.app
+t=2025-05-16T20:21:29+0530 lvl=info msg=start pg=/api/tunnels id=25b84ff6d793c6ca
+t=2025-05-16T20:21:29+0530 lvl=info msg=end pg=/api/tunnels id=25b84ff6d793c6ca status=200 dur=422.703µs
+t=2025-05-16T20:25:07+0530 lvl=info msg="no configuration paths supplied"
+t=2025-05-16T20:25:07+0530 lvl=info msg="using configuration at default config path" path=/home/miraj-raha/.config/ngrok/ngrok.yml
+t=2025-05-16T20:25:07+0530 lvl=info msg="open config file" path=/home/miraj-raha/.config/ngrok/ngrok.yml err=nil
+t=2025-05-16T20:25:07+0530 lvl=warn msg="can't bind default web address, trying alternatives" obj=web addr=127.0.0.1:4040
+t=2025-05-16T20:25:07+0530 lvl=info msg="starting web service" obj=web addr=127.0.0.1:4041 allow_hosts=[]
+t=2025-05-16T20:25:08+0530 lvl=eror msg="failed to reconnect session" obj=tunnels.session err="authentication failed: Your account is limited to 1 simultaneous ngrok agent sessions.\nYou can run multiple simultaneous tunnels from a single agent session by defining the tunnels in your agent configuration file and starting them with the command `ngrok start --all`.\nRead more about the agent configuration file: https://ngrok.com/docs/secure-tunnels/ngrok-agent/reference/config\nYou can view your current agent sessions in the dashboard:\nhttps://dashboard.ngrok.com/agents\r\n\r\nERR_NGROK_108\r\n"
+t=2025-05-16T20:25:08+0530 lvl=eror msg="session closing" obj=tunnels.session err="authentication failed: Your account is limited to 1 simultaneous ngrok agent sessions.\nYou can run multiple simultaneous tunnels from a single agent session by defining the tunnels in your agent configuration file and starting them with the command `ngrok start --all`.\nRead more about the agent configuration file: https://ngrok.com/docs/secure-tunnels/ngrok-agent/reference/config\nYou can view your current agent sessions in the dashboard:\nhttps://dashboard.ngrok.com/agents\r\n\r\nERR_NGROK_108\r\n"
+t=2025-05-16T20:25:08+0530 lvl=info msg="received stop request" obj=app stopReq="{err:{Remote:true Inner:{Inner:0xc0004878f0}} restart:false}"
+t=2025-05-16T20:25:08+0530 lvl=eror msg="terminating with error" obj=app err="authentication failed: Your account is limited to 1 simultaneous ngrok agent sessions.\nYou can run multiple simultaneous tunnels from a single agent session by defining the tunnels in your agent configuration file and starting them with the command `ngrok start --all`.\nRead more about the agent configuration file: https://ngrok.com/docs/secure-tunnels/ngrok-agent/reference/config\nYou can view your current agent sessions in the dashboard:\nhttps://dashboard.ngrok.com/agents\r\n\r\nERR_NGROK_108\r\n"
+t=2025-05-16T20:25:08+0530 lvl=warn msg="failed to check for update" obj=updater err="Post \"https://update.equinox.io/check\": context canceled"
+t=2025-05-16T20:25:08+0530 lvl=crit msg="command failed" err="authentication failed: Your account is limited to 1 simultaneous ngrok agent sessions.\nYou can run multiple simultaneous tunnels from a single agent session by defining the tunnels in your agent configuration file and starting them with the command `ngrok start --all`.\nRead more about the agent configuration file: https://ngrok.com/docs/secure-tunnels/ngrok-agent/reference/config\nYou can view your current agent sessions in the dashboard:\nhttps://dashboard.ngrok.com/agents\r\n\r\nERR_NGROK_108\r\n"
+t=2025-05-16T20:25:08+0530 lvl=info msg="no more state changes" obj=tunnels.session
+t=2025-05-16T20:25:12+0530 lvl=info msg=start pg=/api/tunnels id=9e954a01d91ed6d5
+t=2025-05-16T20:25:12+0530 lvl=info msg=end pg=/api/tunnels id=9e954a01d91ed6d5 status=200 dur=267.713µs
+t=2025-05-16T20:25:49+0530 lvl=info msg="join connections" obj=join id=9637825b388e l=127.0.0.1:5001 r=[2405:201:8019:2136:d8b2:6b38:7edd:ecd0]:60606
+t=2025-05-16T20:25:49+0530 lvl=info msg="join connections" obj=join id=27b828242283 l=127.0.0.1:5001 r=[2405:201:8019:2136:d8b2:6b38:7edd:ecd0]:60606
+t=2025-05-16T20:26:30+0530 lvl=info msg="join connections" obj=join id=9b92979bcd56 l=127.0.0.1:5001 r=[2405:201:8019:2136:d8b2:6b38:7edd:ecd0]:60606
+t=2025-05-16T20:36:12+0530 lvl=info msg="no configuration paths supplied"
+t=2025-05-16T20:36:12+0530 lvl=info msg="using configuration at default config path" path=/home/miraj-raha/.config/ngrok/ngrok.yml
+t=2025-05-16T20:36:12+0530 lvl=info msg="open config file" path=/home/miraj-raha/.config/ngrok/ngrok.yml err=nil
+t=2025-05-16T20:36:12+0530 lvl=warn msg="can't bind default web address, trying alternatives" obj=web addr=127.0.0.1:4040
+t=2025-05-16T20:36:12+0530 lvl=info msg="starting web service" obj=web addr=127.0.0.1:4041 allow_hosts=[]
+t=2025-05-16T20:36:13+0530 lvl=eror msg="failed to reconnect session" obj=tunnels.session err="authentication failed: Your account is limited to 1 simultaneous ngrok agent sessions.\nYou can run multiple simultaneous tunnels from a single agent session by defining the tunnels in your agent configuration file and starting them with the command `ngrok start --all`.\nRead more about the agent configuration file: https://ngrok.com/docs/secure-tunnels/ngrok-agent/reference/config\nYou can view your current agent sessions in the dashboard:\nhttps://dashboard.ngrok.com/agents\r\n\r\nERR_NGROK_108\r\n"
+t=2025-05-16T20:36:13+0530 lvl=eror msg="session closing" obj=tunnels.session err="authentication failed: Your account is limited to 1 simultaneous ngrok agent sessions.\nYou can run multiple simultaneous tunnels from a single agent session by defining the tunnels in your agent configuration file and starting them with the command `ngrok start --all`.\nRead more about the agent configuration file: https://ngrok.com/docs/secure-tunnels/ngrok-agent/reference/config\nYou can view your current agent sessions in the dashboard:\nhttps://dashboard.ngrok.com/agents\r\n\r\nERR_NGROK_108\r\n"
+t=2025-05-16T20:36:13+0530 lvl=info msg="received stop request" obj=app stopReq="{err:{Remote:true Inner:{Inner:0xc000a503e0}} restart:false}"
+t=2025-05-16T20:36:13+0530 lvl=eror msg="terminating with error" obj=app err="authentication failed: Your account is limited to 1 simultaneous ngrok agent sessions.\nYou can run multiple simultaneous tunnels from a single agent session by defining the tunnels in your agent configuration file and starting them with the command `ngrok start --all`.\nRead more about the agent configuration file: https://ngrok.com/docs/secure-tunnels/ngrok-agent/reference/config\nYou can view your current agent sessions in the dashboard:\nhttps://dashboard.ngrok.com/agents\r\n\r\nERR_NGROK_108\r\n"
+t=2025-05-16T20:36:13+0530 lvl=crit msg="command failed" err="authentication failed: Your account is limited to 1 simultaneous ngrok agent sessions.\nYou can run multiple simultaneous tunnels from a single agent session by defining the tunnels in your agent configuration file and starting them with the command `ngrok start --all`.\nRead more about the agent configuration file: https://ngrok.com/docs/secure-tunnels/ngrok-agent/reference/config\nYou can view your current agent sessions in the dashboard:\nhttps://dashboard.ngrok.com/agents\r\n\r\nERR_NGROK_108\r\n"
+t=2025-05-16T20:36:17+0530 lvl=info msg=start pg=/api/tunnels id=5449a6313f255f03
+t=2025-05-16T20:36:17+0530 lvl=info msg=end pg=/api/tunnels id=5449a6313f255f03 status=200 dur=190.093µs
+t=2025-05-16T20:39:22+0530 lvl=info msg="no configuration paths supplied"
+t=2025-05-16T20:39:22+0530 lvl=info msg="using configuration at default config path" path=/home/miraj-raha/.config/ngrok/ngrok.yml
+t=2025-05-16T20:39:22+0530 lvl=info msg="open config file" path=/home/miraj-raha/.config/ngrok/ngrok.yml err=nil
+t=2025-05-16T20:39:22+0530 lvl=info msg="starting web service" obj=web addr=127.0.0.1:4040 allow_hosts=[]
+t=2025-05-16T20:39:23+0530 lvl=info msg="client session established" obj=tunnels.session
+t=2025-05-16T20:39:23+0530 lvl=info msg="tunnel session started" obj=tunnels.session
+t=2025-05-16T20:39:23+0530 lvl=info msg="started tunnel" obj=tunnels name=command_line addr=http://localhost:5001 url=https://deb2-2405-201-8019-2136-d8b2-6b38-7edd-ecd0.ngrok-free.app
+t=2025-05-16T20:39:27+0530 lvl=info msg=start pg=/api/tunnels id=556a511dc57c32c0
+t=2025-05-16T20:39:27+0530 lvl=info msg=end pg=/api/tunnels id=556a511dc57c32c0 status=200 dur=410.594µs
+t=2025-05-16T20:41:10+0530 lvl=info msg=start pg=/ id=1dd4f647dcf6e213
+t=2025-05-16T20:41:10+0530 lvl=info msg=end pg=/ id=1dd4f647dcf6e213 status=302 dur=129.03µs
+t=2025-05-16T20:41:10+0530 lvl=info msg=start pg=/inspect/http id=ffb904d235dc05a2
+t=2025-05-16T20:41:10+0530 lvl=info msg=end pg=/inspect/http id=ffb904d235dc05a2 status=200 dur=451.28µs
+t=2025-05-16T20:41:10+0530 lvl=info msg=start pg=/static/css/app.398abcb27117c32bb620.css id=5e024d3ca2437b1d
+t=2025-05-16T20:41:10+0530 lvl=info msg=start pg=/static/js/rpx.f7950203a09a23d786c9.js id=e4a2fb37021e9b10
+t=2025-05-16T20:41:10+0530 lvl=info msg=start pg=/static/js/vendor.00651d8b886a1e6d6e1b.js id=3ec9d56f7855b4f9
+t=2025-05-16T20:41:10+0530 lvl=info msg=start pg=/static/js/app.451cc64c2e8150528c9d.js id=68908147e7147457
+t=2025-05-16T20:41:10+0530 lvl=info msg=end pg=/static/css/app.398abcb27117c32bb620.css id=5e024d3ca2437b1d status=200 dur=3.767763ms
+t=2025-05-16T20:41:10+0530 lvl=info msg=end pg=/static/js/rpx.f7950203a09a23d786c9.js id=e4a2fb37021e9b10 status=200 dur=1.983382ms
+t=2025-05-16T20:41:10+0530 lvl=info msg=end pg=/static/js/app.451cc64c2e8150528c9d.js id=68908147e7147457 status=200 dur=1.780875ms
+t=2025-05-16T20:41:10+0530 lvl=info msg=end pg=/static/js/vendor.00651d8b886a1e6d6e1b.js id=3ec9d56f7855b4f9 status=200 dur=2.542673ms
+t=2025-05-16T20:41:10+0530 lvl=info msg=start pg=/grpc/agent.Web/Preloaded id=ef907eec0472a3a0
+t=2025-05-16T20:41:10+0530 lvl=info msg=end pg=/grpc/agent.Web/Preloaded id=ef907eec0472a3a0 status=200 dur=873.045µs
+t=2025-05-16T20:41:10+0530 lvl=info msg=start pg=/grpc/agent.Web/State id=82e3d27093426ed3
+t=2025-05-16T20:41:10+0530 lvl=info msg=start pg=/static/favicon.ico id=0e6503a45696c97c
+t=2025-05-16T20:41:10+0530 lvl=info msg=end pg=/static/favicon.ico id=0e6503a45696c97c status=200 dur=129.881µs
+t=2025-05-16T20:41:19+0530 lvl=info msg="join connections" obj=join id=b3f017cc4210 l=127.0.0.1:5001 r=[2405:201:8019:2136:d8b2:6b38:7edd:ecd0]:47380
+t=2025-05-16T20:41:19+0530 lvl=info msg=start pg=/static/assets/glyphicons-halflings-regular.woff2 id=2700b7dcf9c99c81
+t=2025-05-16T20:41:19+0530 lvl=info msg=end pg=/static/assets/glyphicons-halflings-regular.woff2 id=2700b7dcf9c99c81 status=404 dur=92.412µs
+t=2025-05-16T20:41:19+0530 lvl=info msg=start pg=/static/assets/glyphicons-halflings-regular.woff id=abc03e3089b3efaf
+t=2025-05-16T20:41:19+0530 lvl=info msg=end pg=/static/assets/glyphicons-halflings-regular.woff id=abc03e3089b3efaf status=404 dur=88.725µs
+t=2025-05-16T20:41:19+0530 lvl=info msg=start pg=/static/assets/glyphicons-halflings-regular.ttf id=00a9176c3cea73e2
+t=2025-05-16T20:41:19+0530 lvl=info msg=end pg=/static/assets/glyphicons-halflings-regular.ttf id=00a9176c3cea73e2 status=404 dur=58.158µs
+t=2025-05-16T20:41:19+0530 lvl=info msg="join connections" obj=join id=fa9636e397f6 l=127.0.0.1:5001 r=[2405:201:8019:2136:d8b2:6b38:7edd:ecd0]:47380
+t=2025-05-16T20:47:45+0530 lvl=info msg="no configuration paths supplied"
+t=2025-05-16T20:47:45+0530 lvl=info msg="using configuration at default config path" path=/home/miraj-raha/.config/ngrok/ngrok.yml
+t=2025-05-16T20:47:45+0530 lvl=info msg="open config file" path=/home/miraj-raha/.config/ngrok/ngrok.yml err=nil
+t=2025-05-16T20:47:45+0530 lvl=warn msg="can't bind default web address, trying alternatives" obj=web addr=127.0.0.1:4040
+t=2025-05-16T20:47:45+0530 lvl=info msg="starting web service" obj=web addr=127.0.0.1:4041 allow_hosts=[]
+t=2025-05-16T20:47:45+0530 lvl=eror msg="failed to reconnect session" obj=tunnels.session err="authentication failed: Your account is limited to 1 simultaneous ngrok agent sessions.\nYou can run multiple simultaneous tunnels from a single agent session by defining the tunnels in your agent configuration file and starting them with the command `ngrok start --all`.\nRead more about the agent configuration file: https://ngrok.com/docs/secure-tunnels/ngrok-agent/reference/config\nYou can view your current agent sessions in the dashboard:\nhttps://dashboard.ngrok.com/agents\r\n\r\nERR_NGROK_108\r\n"
+t=2025-05-16T20:47:45+0530 lvl=eror msg="session closing" obj=tunnels.session err="authentication failed: Your account is limited to 1 simultaneous ngrok agent sessions.\nYou can run multiple simultaneous tunnels from a single agent session by defining the tunnels in your agent configuration file and starting them with the command `ngrok start --all`.\nRead more about the agent configuration file: https://ngrok.com/docs/secure-tunnels/ngrok-agent/reference/config\nYou can view your current agent sessions in the dashboard:\nhttps://dashboard.ngrok.com/agents\r\n\r\nERR_NGROK_108\r\n"
+t=2025-05-16T20:47:45+0530 lvl=info msg="received stop request" obj=app stopReq="{err:{Remote:true Inner:{Inner:0xc00047d940}} restart:false}"
+t=2025-05-16T20:47:45+0530 lvl=eror msg="terminating with error" obj=app err="authentication failed: Your account is limited to 1 simultaneous ngrok agent sessions.\nYou can run multiple simultaneous tunnels from a single agent session by defining the tunnels in your agent configuration file and starting them with the command `ngrok start --all`.\nRead more about the agent configuration file: https://ngrok.com/docs/secure-tunnels/ngrok-agent/reference/config\nYou can view your current agent sessions in the dashboard:\nhttps://dashboard.ngrok.com/agents\r\n\r\nERR_NGROK_108\r\n"
+t=2025-05-16T20:47:45+0530 lvl=warn msg="failed to check for update" obj=updater err="Post \"https://update.equinox.io/check\": context canceled"
+t=2025-05-16T20:47:45+0530 lvl=crit msg="command failed" err="authentication failed: Your account is limited to 1 simultaneous ngrok agent sessions.\nYou can run multiple simultaneous tunnels from a single agent session by defining the tunnels in your agent configuration file and starting them with the command `ngrok start --all`.\nRead more about the agent configuration file: https://ngrok.com/docs/secure-tunnels/ngrok-agent/reference/config\nYou can view your current agent sessions in the dashboard:\nhttps://dashboard.ngrok.com/agents\r\n\r\nERR_NGROK_108\r\n"
+t=2025-05-16T20:47:50+0530 lvl=info msg=start pg=/api/tunnels id=6d8878340f7bec3f
+t=2025-05-16T20:47:50+0530 lvl=info msg=end pg=/api/tunnels id=6d8878340f7bec3f status=200 dur=292.284µs
+t=2025-05-16T20:48:57+0530 lvl=info msg="no configuration paths supplied"
+t=2025-05-16T20:48:57+0530 lvl=info msg="using configuration at default config path" path=/home/miraj-raha/.config/ngrok/ngrok.yml
+t=2025-05-16T20:48:57+0530 lvl=info msg="open config file" path=/home/miraj-raha/.config/ngrok/ngrok.yml err=nil
+t=2025-05-16T20:48:57+0530 lvl=info msg="starting web service" obj=web addr=127.0.0.1:4040 allow_hosts=[]
+t=2025-05-16T20:48:58+0530 lvl=info msg="client session established" obj=tunnels.session
+t=2025-05-16T20:48:58+0530 lvl=info msg="tunnel session started" obj=tunnels.session
+t=2025-05-16T20:48:58+0530 lvl=info msg="started tunnel" obj=tunnels name=command_line addr=http://localhost:5001 url=https://a470-2405-201-8019-2136-d8b2-6b38-7edd-ecd0.ngrok-free.app
+t=2025-05-16T20:48:58+0530 lvl=info msg=start pg=/grpc/agent.Web/State id=92ae9ddd599002ac
+t=2025-05-16T20:49:02+0530 lvl=info msg=start pg=/api/tunnels id=baa243096942932a
+t=2025-05-16T20:49:02+0530 lvl=info msg=end pg=/api/tunnels id=baa243096942932a status=200 dur=263.972µs
+t=2025-05-17T11:23:11+0530 lvl=info msg="no configuration paths supplied"
+t=2025-05-17T11:23:11+0530 lvl=info msg="using configuration at default config path" path=/home/miraj-raha/.config/ngrok/ngrok.yml
+t=2025-05-17T11:23:11+0530 lvl=info msg="open config file" path=/home/miraj-raha/.config/ngrok/ngrok.yml err=nil
+t=2025-05-17T11:23:11+0530 lvl=info msg="starting web service" obj=web addr=127.0.0.1:4040 allow_hosts=[]
+t=2025-05-17T11:23:12+0530 lvl=info msg="client session established" obj=tunnels.session
+t=2025-05-17T11:23:12+0530 lvl=info msg="tunnel session started" obj=tunnels.session
+t=2025-05-17T11:23:12+0530 lvl=info msg="started tunnel" obj=tunnels name=command_line addr=http://localhost:5001 url=https://ca68-2405-201-8019-2136-9078-347e-d14f-e720.ngrok-free.app
+t=2025-05-17T11:23:14+0530 lvl=info msg=start pg=/api/tunnels id=585efbdd54392662
+t=2025-05-17T11:23:14+0530 lvl=info msg=end pg=/api/tunnels id=585efbdd54392662 status=200 dur=300.651µs
+t=2025-05-17T11:23:19+0530 lvl=info msg=start pg=/api/tunnels id=e109ca430adcb391
+t=2025-05-17T11:23:19+0530 lvl=info msg=end pg=/api/tunnels id=e109ca430adcb391 status=200 dur=281.273µs
+t=2025-05-17T11:23:37+0530 lvl=warn msg="failed to open private leg" id=9269be188a90 privaddr=localhost:5001 err="dial tcp 127.0.0.1:5001: connect: connection refused"
+t=2025-05-17T11:23:38+0530 lvl=warn msg="failed to open private leg" id=0a4d7965634a privaddr=localhost:5001 err="dial tcp 127.0.0.1:5001: connect: connection refused"
+t=2025-05-17T11:36:00+0530 lvl=info msg=start pg=/api/tunnels id=36b21108b1315858
+t=2025-05-17T11:36:00+0530 lvl=info msg=end pg=/api/tunnels id=36b21108b1315858 status=200 dur=275.625µs
+t=2025-05-17T11:36:16+0530 lvl=warn msg="failed to open private leg" id=86922bfcb608 privaddr=localhost:5001 err="dial tcp 127.0.0.1:5001: connect: connection refused"
+t=2025-05-17T11:36:17+0530 lvl=warn msg="failed to open private leg" id=be3b93a69da0 privaddr=localhost:5001 err="dial tcp 127.0.0.1:5001: connect: connection refused"
+t=2025-05-17T11:48:06+0530 lvl=info msg=start pg=/api/tunnels id=b94ef7dfbc3d0fe1
+t=2025-05-17T11:48:06+0530 lvl=info msg=end pg=/api/tunnels id=b94ef7dfbc3d0fe1 status=200 dur=203.103µs
+t=2025-05-17T11:48:22+0530 lvl=warn msg="failed to open private leg" id=9eb48fd3d346 privaddr=localhost:5001 err="dial tcp 127.0.0.1:5001: connect: connection refused"
+t=2025-05-17T11:48:23+0530 lvl=warn msg="failed to open private leg" id=199b2c2480e8 privaddr=localhost:5001 err="dial tcp 127.0.0.1:5001: connect: connection refused"
