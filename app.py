@@ -25,7 +25,7 @@ def hello():
 
 @app.route("/view")
 def homepage():
-    return render_template("flight.html")
+    return render_template("flight.html", data=cached_data)
 
 @app.route("/arrivals/<string:icao>")
 def get_arrivals(icao):
