@@ -1,18 +1,24 @@
 #!/bin/bash
 
-# 🌐 Base URL of your deployed app on Render
+# 🌍 Your Render root
 BASE_URL="https://flightvision.onrender.com"
 ICAO="VABB"
 
-# 🧼 Trigger a manual cache refresh
-echo "🔁 Triggering cache refresh..."
+# 🌀 Trigger cache refresh (synchronous)
+echo "🔁 Triggering manual refresh..."
 curl --silent "$BASE_URL/refresh"
 
-# 🌍 Open Render endpoints in default browser
-xdg-open "$BASE_URL/view"
-xdg-open "$BASE_URL/arrivals/$ICAO"
-xdg-open "$BASE_URL/departures/$ICAO"
-xdg-open "$BASE_URL/belt/$ICAO"
+# ⏳ Wait a few seconds to ensure cache is updated
+sleep 3
 
-echo "✅ All endpoints opened in your browser."
+# 🧭 Open HTML dashboard
+echo "🌐 Opening /view..."
+xdg-open "$BASE_URL/view"
+
+# (Optional) Open JSON endpoints in browser tabs
+# xdg-open "$BASE_URL/arrivals/$ICAO"
+# xdg-open "$BASE_URL/departures/$ICAO"
+# xdg-open "$BASE_URL/belt/$ICAO"
+
+echo "✅ FlightVision launched in browser."
 

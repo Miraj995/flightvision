@@ -1,0 +1,55 @@
+.
+├── admin
+│   └── views.py
+├── app.py
+├── backend-api-avstack
+│   └── requirements.txt
+├── config.py
+├── .env
+├── extras
+│   ├── build
+│   │   └── com
+│   │       └── flightinfo
+│   │           └── FlightDisplayLauncher.class
+│   ├── FlightDisplayLauncher.jar
+│   ├── java-launcher
+│   │   └── com
+│   │       └── flightinfo
+│   │           └── FlightDisplayLauncher.java
+│   ├── lib
+│   │   ├── dotenv-java.jar
+│   │   └── json-20231013.jar
+│   ├── ngrok_launcher.sh
+│   ├── run_launcher.sh
+│   └── scheduler.sh
+├── .gitignore
+├── manifest.txt
+├── migrations
+│   ├── alembic.ini
+│   ├── env.py
+│   ├── README
+│   ├── script.py.mako
+│   └── versions
+│       └── 395a27bb334c_add_flight_and_advertisement_models.py
+├── models
+│   └── db_models.py
+├── open_ads_display.sh
+├── open_flightvision.sh
+├── README.md
+├── requirements.txt
+├── run_local_test.sh
+├── static
+│   └── media
+├── structure.txt
+└── templates
+    ├── admin
+    │   ├── ad_form.html
+    │   ├── ad_list.html
+    │   ├── flight_form.html
+    │   └── flight_list.html
+    ├── ads.html
+    ├── arrivals.html
+    ├── departures.html
+    └── flight.html
+
+18 directories, 35 files

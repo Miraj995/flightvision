@@ -1,37 +1,87 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Flight Info</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Info | FlightVision</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        table { border-collapse: collapse; width: 100%; }
-        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
-        th { background-color: #f2f2f2; }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+        h2 {
+            color: #333;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            background-color: white;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #e6f2ff;
+        }
+        .timestamp {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #555;
+        }
+        .no-data {
+            color: #c00;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
     <h2>Live Flight Data</h2>
+    <div class="timestamp">
+        🕒 Current Time: <span id="clock">Loading...</span>
+    </div>
+
+    <script>
+    function updateClock() {
+        const now = new Date();
+        const formatted = now.toLocaleTimeString('en-IN', {
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        });
+        document.getElementById('clock').textContent = formatted;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+    </script>
+
     {% if flights and flights|length > 0 %}
-    <table>
-        <tr>
-            <th>Flight</th>
-            <th>Departure</th>
-            <th>Arrival</th>
-            <th>Status</th>
-            <th>Gate</th>
-        </tr>
-        {% for flight in flights %}
-        <tr>
-            <td>{{ flight.flight }}</td>
-            <td>{{ flight.departure }}</td>
-            <td>{{ flight.arrival }}</td>
-            <td>{{ flight.status }}</td>
-            <td>{{ flight.gate or "N/A" }}</td>
-        </tr>
-        {% endfor %}
-    </table>
+        <table>
+            <thead>
+                <tr>
+                    <th>Flight</th>
+                    <th>Departure</th>
+                    <th>Arrival</th>
+                    <th>Status</th>
+                    <th>Gate</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for flight in flights %}
+                <tr>
+                    <td>{{ flight.flight }}</td>
+                    <td>{{ flight.departure }}</td>
+                    <td>{{ flight.arrival }}</td>
+                    <td>{{ flight.status }}</td>
+                    <td>{{ flight.gate or "N/A" }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     {% else %}
-        <p>No flight data available at the moment. Please try again later.</p>
+        <p class="no-data">⚠️ No flight data available at the moment. Please try again later.</p>
     {% endif %}
 </body>
 </html>
