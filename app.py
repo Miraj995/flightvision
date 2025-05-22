@@ -3,7 +3,6 @@ import requests
 import os
 from dotenv import load_dotenv
 from datetime import datetime
-
 from config import Config
 from models.db_models import db, Flight, Advertisement
 from flask_migrate import Migrate
@@ -13,13 +12,16 @@ load_dotenv()
 app = Flask(__name__)
 app.config.from_object(Config)
 
+# DB Setup
 db.init_app(app)
 migrate = Migrate(app, db)
 
+# API Setup
 KEY = app.config.get("AVIATIONSTACK_KEY")
 BASE_URL = "http://api.aviationstack.com/v1"
 
-cached_data = {
+# In-memory Cache
+dcached_data = {
     "arrivals": {},
     "departures": {},
     "belt": {}
@@ -27,51 +29,62 @@ cached_data = {
 
 @app.route("/")
 def hello():
-    return "\u2705 Flask API is running! Access the live refresh at: <a href=\"https://flightvision.onrender.com/refresh\">/refresh</a>"
+    return "✅ Flask API is running!"
 
 @app.route("/view")
 def homepage():
-    flights = Flight.query.all()
+    print("📝 Rendering flight view...")
+    flights = []
+    for icao, data in dcached_data["arrivals"].items():
+        for item in data.get("data", []):
+            flights.append({
+                "flight": item.get("flight", {}).get("iata", "Unknown"),
+                "departure": item.get("departure", {}).get("airport", "Unknown"),
+                "arrival": item.get("arrival", {}).get("airport", "Unknown"),
+                "status": item.get("flight_status", "Unknown"),
+                "gate": item.get("departure", {}).get("gate") or item.get("arrival", {}).get("gate") or "N/A"
+            })
     return render_template("flight.html", flights=flights)
 
 @app.route("/refresh")
 def manual_refresh():
-    print("\U0001f504 Starting cache refresh and DB sync...")
+    print("🔁 Manual refresh triggered")
+
+    if not KEY:
+        print("❌ API Key not found.")
+        return jsonify({"error": "API key not configured"}), 500
 
     for icao in ["VABB"]:
         try:
-            print(f"\U0001f310 Fetching data for {icao}...")
             arrivals_url = f"{BASE_URL}/flights?access_key={KEY}&arr_icao={icao}"
             departures_url = f"{BASE_URL}/flights?access_key={KEY}&dep_icao={icao}"
 
-            arrivals_response = requests.get(arrivals_url).json()
-            departures_response = requests.get(departures_url).json()
+            arrivals_response = requests.get(arrivals_url)
+            departures_response = requests.get(departures_url)
 
-            print(f"\u2705 Arrivals fetched: {len(arrivals_response.get('data', []))}")
-            print(f"\u2705 Departures fetched: {len(departures_response.get('data', []))}")
+            arrivals_json = arrivals_response.json()
+            departures_json = departures_response.json()
 
-            # Clear previous data
-            Flight.query.delete()
+            print(f"✅ Arrivals: {len(arrivals_json.get('data', []))}")
+            print(f"✅ Departures: {len(departures_json.get('data', []))}")
 
-            # Insert new flights
-            for item in arrivals_response.get("data", []):
-                new_flight = Flight(
-                    flight_number=item.get("flight", {}).get("iata", "Unknown"),
-                    status=item.get("flight_status", "Unknown"),
-                    arrival=item.get("arrival", {}).get("airport", "Unknown"),
-                    departure=item.get("departure", {}).get("airport", "Unknown"),
-                    gate=item.get("departure", {}).get("gate") or item.get("arrival", {}).get("gate"),
-                    baggage_belt=item.get("arrival", {}).get("baggage")
-                )
-                db.session.add(new_flight)
-            db.session.commit()
+            belt_data = []
+            for flight in arrivals_json.get("data", []):
+                belt = flight.get("arrival", {}).get("baggage", "N/A")
+                flight_num = flight.get("flight", {}).get("iata", "Unknown")
+                if belt and belt != "N/A":
+                    belt_data.append({"flight": flight_num, "belt": belt})
 
-            print("\U0001f4c4 Database updated with new flight data.")
+            dcached_data["arrivals"][icao] = arrivals_json
+            dcached_data["departures"][icao] = departures_json
+            dcached_data["belt"][icao] = {"belt_info": belt_data}
 
         except Exception as e:
-            print(f"\u274c Error during refresh for {icao}: {e}")
+            print(f"❌ Error for {icao}: {e}")
+            return jsonify({"error": str(e)}), 500
 
-    return jsonify({"message": "\u2705 Manual cache update and DB sync complete", "time": str(datetime.now())})
+    print("✅ Cache refresh complete.")
+    return jsonify({"message": "Manual cache updated", "timestamp": str(datetime.now())})
 
 @app.route("/admin/flights")
 def flight_list():
@@ -112,6 +125,18 @@ def ad_form():
         return redirect(url_for("ad_list"))
     return render_template("admin/ad_form.html")
 
+@app.route("/arrivals/<string:icao>")
+def get_arrivals(icao):
+    return jsonify(dcached_data["arrivals"].get(icao, {"data": []}))
+
+@app.route("/departures/<string:icao>")
+def get_departures(icao):
+    return jsonify(dcached_data["departures"].get(icao, {"data": []}))
+
+@app.route("/belt/<string:icao>")
+def get_belt_info(icao):
+    return jsonify(dcached_data["belt"].get(icao, {"belt_info": []}))
+
 if __name__ == "__main__":
-    print("\U0001f680 Starting Flask server...")
+    print("🚀 Starting Flask server...")
     app.run(host="0.0.0.0", port=5001, debug=True)
