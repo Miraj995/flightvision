@@ -4,7 +4,11 @@ from flask_migrate import Migrate
 from datetime import datetime
 import os
 import requests
-from dotenv import load_dotenv
+
+# Load .env only if running locally
+if os.environ.get("RENDER") is None:
+    from dotenv import load_dotenv
+    load_dotenv()
 
 from config import Config
 from models.db_models import db, Flight, Advertisement
@@ -12,13 +16,15 @@ from models.db_models import db, Flight, Advertisement
 # --- INIT APP ---
 app = Flask(__name__)
 app.config.from_object(Config)
-KEY = app.config.get("AVIATIONSTACK_KEY")
+
+# --- API KEY ---
+KEY = os.getenv("AVIATIONSTACK_KEY")
 BASE_URL = "http://api.aviationstack.com/v1"
 
 if not KEY:
-    print("❌ API key not found.")
+    print("❌ API key not found. Check Render dashboard -> Environment tab.")
 else:
-    print("✅ API key loaded.")
+    print("✅ API key loaded successfully.")
 
 # --- DB Setup ---
 db.init_app(app)
@@ -54,24 +60,12 @@ def homepage():
             flights.append(flight_info)
     return render_template("flight.html", flights=flights)
 
-@app.route("/arrivals/<string:icao>")
-def get_arrivals(icao):
-    return jsonify(cached_data["arrivals"].get(icao, {"data": []}))
-
-@app.route("/departures/<string:icao>")
-def get_departures(icao):
-    return jsonify(cached_data["departures"].get(icao, {"data": []}))
-
-@app.route("/belt/<string:icao>")
-def get_belt_info(icao):
-    return jsonify(cached_data["belt"].get(icao, {"belt_info": []}))
-
 @app.route("/refresh")
 def manual_refresh():
     if not KEY:
         return jsonify({"error": "API key not found"}), 500
 
-    print("🔄 Refresh triggered.")
+    print("🔄 Manual refresh triggered.")
     for icao in ["VABB"]:
         try:
             arr_url = f"{BASE_URL}/flights?access_key={KEY}&arr_icao={icao}"
@@ -91,12 +85,11 @@ def manual_refresh():
             cached_data["departures"][icao] = departures
             cached_data["belt"][icao] = {"belt_info": belt_data}
 
-            print(f"✅ Refreshed {icao}: {len(arrivals.get('data', []))} arrivals")
+            print(f"✅ {icao} refreshed: {len(arrivals.get('data', []))} arrivals.")
 
         except Exception as e:
             print(f"❌ Error refreshing {icao}: {e}")
     return jsonify({"message": "✅ Manual refresh complete", "time": str(datetime.now())})
-
 
 # ========================
 #        ADMIN PANEL
@@ -141,11 +134,9 @@ def ad_form():
         return redirect(url_for("ad_list"))
     return render_template("admin/ad_form.html")
 
-
 # ========================
 #         RUN
 # ========================
-
 if __name__ == "__main__":
     print("🚀 Running FlightVision locally...")
     app.run(host="0.0.0.0", port=5001, debug=True)
