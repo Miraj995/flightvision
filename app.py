@@ -17,7 +17,7 @@ app.config.from_object(Config)
 load_dotenv()
 
 # --- Grab API Key securely ---
-KEY = os.getenv("AVIATIONSTACK_KEY")
+KEY = app.config.get("AVIATIONSTACK_KEY")
 BASE_URL = "http://api.aviationstack.com/v1"
 
 if not KEY:
