@@ -1,30 +1,39 @@
 #!/bin/bash
 
-# Set your deployed Render URL
+# ==========================
+# ✈️ FlightVision Render Test Script
+# ==========================
+
+# Constants
 RENDER_URL="https://flightvision.onrender.com"
 REFRESH_ENDPOINT="$RENDER_URL/refresh"
 VIEW_PAGE="$RENDER_URL/view"
+ADMIN_FLIGHTS="$RENDER_URL/admin/flights"
+ADMIN_ADS="$RENDER_URL/admin/ads"
 
-# Postgres credentials (optional: comment out if not testing DB from CLI)
+# Database credentials (Render-managed)
 DB_USER="flightvision_db_user"
 DB_NAME="flightvision_db"
 DB_HOST="dpg-d0monu6mcj7s739gfmm0-a.oregon-postgres.render.com"
-DB_PASS="VqudVy31XoYxLDkwsCQxlkdHIqgOdn9r"  # Ensure this is safe/private
+DB_PASS="VqudVy31XoYxLDkwsCQxlkdHIqgOdn9r"  # Keep secure
 
-echo "🔄 Triggering manual refresh from Render..."
+# Trigger remote cache refresh
+echo "🔄 Triggering manual refresh on Render..."
 curl -s "$REFRESH_ENDPOINT"
-echo -e "\n✅ Refresh complete!"
+echo -e "\n✅ Refresh triggered!"
 
-# Optional: fetch flights from DB (requires psql CLI + password passing)
-echo "📦 Fetching flight records from DB:"
+# Optional: view DB contents
+echo "📦 Fetching flights from DB:"
 PGPASSWORD=$DB_PASS psql -h $DB_HOST -U $DB_USER -d $DB_NAME -c "SELECT * FROM flight;"
 
-echo "🧾 Fetching ads from DB:"
+echo "📺 Fetching ads from DB:"
 PGPASSWORD=$DB_PASS psql -h $DB_HOST -U $DB_USER -d $DB_NAME -c "SELECT * FROM advertisement;"
 
-# Automatically open browser to Render view page
-echo "🌐 Opening flight view page..."
+# Auto open view + admin URLs
+echo "🌍 Opening flight info and admin pages..."
 xdg-open "$VIEW_PAGE" || open "$VIEW_PAGE"
+xdg-open "$ADMIN_FLIGHTS" || open "$ADMIN_FLIGHTS"
+xdg-open "$ADMIN_ADS" || open "$ADMIN_ADS"
 
-echo "✅ One-time Render test completed."
+echo "✅ One-time Render test completed successfully."
 
