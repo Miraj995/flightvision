@@ -13,13 +13,6 @@ from models.db_models import db, Flight, Advertisement
 app = Flask(__name__)
 app.config.from_object(Config)
 KEY = app.config.get("AVIATIONSTACK_KEY")
-
-
-# --- LOAD .env (for local only, ignored on Render) ---
-load_dotenv()
-
-# --- Grab API Key securely ---
-KEY = os.getenv("AVIATIONSTACK_KEY")
 BASE_URL = "http://api.aviationstack.com/v1"
 
 if not KEY:
