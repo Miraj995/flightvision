@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head><title>Arrivals</title></head>
+<body>
+    <h2>Arriving Flights</h2>
+    <ul>
+    {% for flight in flights %}
+        <li>{{ flight.flight_number }} from {{ flight.departure }} - {{ flight.status }}</li>
+    {% endfor %}
+    </ul>
+</body>
+</html>

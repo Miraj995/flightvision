@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head><title>Add Flight</title></head>
+<body>
+    <h2>Add New Flight</h2>
+    <form method="POST">
+        Flight Number: <input type="text" name="flight_number" required><br><br>
+        Status: <input type="text" name="status" required><br><br>
+        Arrival: <input type="text" name="arrival" required><br><br>
+        Departure: <input type="text" name="departure" required><br><br>
+        Gate: <input type="text" name="gate"><br><br>
+        Baggage Belt: <input type="text" name="baggage_belt"><br><br>
+        <button type="submit">Submit</button>
+    </form>
+    <a href="{{ url_for('flight_list') }}">Back to Flight List</a>
+</body>
+</html>

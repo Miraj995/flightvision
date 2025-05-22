@@ -1,8 +1,9 @@
  * Serving Flask app 'app.py'
  * Debug mode: off
 [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
- * Running on http://127.0.0.1:5000
+ * Running on http://127.0.0.1:5001
 [33mPress CTRL+C to quit[0m
-127.0.0.1 - - [20/May/2025 22:01:31] "GET /refresh HTTP/1.1" 200 -
-127.0.0.1 - - [20/May/2025 22:01:33] "GET /refresh HTTP/1.1" 200 -
-127.0.0.1 - - [20/May/2025 22:01:34] "GET /view HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2025 16:17:49] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2025 16:17:49] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2025 16:17:58] "GET /refresh HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2025 16:18:00] "GET /view HTTP/1.1" 200 -

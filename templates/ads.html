@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head><title>Visual Ads</title></head>
+<body>
+    <h2>Live Advertisements</h2>
+    {% for ad in ads %}
+        {% if ad.media_type == 'image' %}
+            <img src="{{ ad.media_url }}" alt="{{ ad.title }}" style="max-width: 100%; height: auto;"><br>
+        {% elif ad.media_type == 'video' %}
+            <video width="600" controls>
+                <source src="{{ ad.media_url }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video><br>
+        {% endif %}
+        <hr>
+    {% endfor %}
+</body>
+</html>

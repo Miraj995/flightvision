@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Ad List | FlightVision</title>
-</head>
+<html>
+<head><title>Ad List</title></head>
 <body>
-    <h2>Advertisement Listings</h2>
-    <p>📢 No ads available yet. This is a placeholder view.</p>
+    <h2>Advertisements</h2>
+    <a href="{{ url_for('ad_form') }}">➕ Add New Advertisement</a>
+    <ul>
+    {% for ad in ads %}
+        <li>{{ ad.title }} - {{ ad.media_type }} - <a href="{{ ad.media_url }}" target="_blank">View</a></li>
+    {% endfor %}
+    </ul>
 </body>
 </html>
+
 

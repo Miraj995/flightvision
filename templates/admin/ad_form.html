@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head><title>Add Advertisement</title></head>
+<body>
+    <h2>Add Advertisement</h2>
+    <form method="POST">
+        Title: <input type="text" name="title" required><br><br>
+        Media URL: <input type="text" name="media_url" required><br><br>
+        Media Type: 
+        <select name="media_type">
+            <option value="image">Image</option>
+            <option value="video">Video</option>
+        </select><br><br>
+        <button type="submit">Add</button>
+    </form>
+    <a href="{{ url_for('ad_list') }}">Back to Ad List</a>
+</body>
+</html>

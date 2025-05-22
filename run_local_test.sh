@@ -1,32 +1,30 @@
 #!/bin/bash
 
-echo "🚀 Starting one-time refresh test"
+# Set your deployed Render URL
+RENDER_URL="https://flightvision.onrender.com"
+REFRESH_ENDPOINT="$RENDER_URL/refresh"
+VIEW_PAGE="$RENDER_URL/view"
 
-# Activate virtual environment
-source venv/bin/activate
+# Postgres credentials (optional: comment out if not testing DB from CLI)
+DB_USER="flightvision_db_user"
+DB_NAME="flightvision_db"
+DB_HOST="dpg-d0monu6mcj7s739gfmm0-a.oregon-postgres.render.com"
+DB_PASS="VqudVy31XoYxLDkwsCQxlkdHIqgOdn9r"  # Ensure this is safe/private
 
-# Run Flask app in the background
-export FLASK_APP=app.py
-flask run --port=5001 > flask.log 2>&1 &
-FLASK_PID=$!
-sleep 2
+echo "🔄 Triggering manual refresh from Render..."
+curl -s "$REFRESH_ENDPOINT"
+echo -e "\n✅ Refresh complete!"
 
-# Trigger one-time cache refresh
-curl http://127.0.0.1:5001/refresh
-echo ""
-echo "✅ Refresh complete!"
-
-# Query flight records from DB
+# Optional: fetch flights from DB (requires psql CLI + password passing)
 echo "📦 Fetching flight records from DB:"
-PGPASSWORD=securepass psql -U miraj -h localhost -d flightvision_db -c "SELECT * FROM flight;"
+PGPASSWORD=$DB_PASS psql -h $DB_HOST -U $DB_USER -d $DB_NAME -c "SELECT * FROM flight;"
 
-# Query advertisements
 echo "🧾 Fetching ads from DB:"
-PGPASSWORD=securepass psql -U miraj -h localhost -d flightvision_db -c "SELECT * FROM advertisement;"
+PGPASSWORD=$DB_PASS psql -h $DB_HOST -U $DB_USER -d $DB_NAME -c "SELECT * FROM advertisement;"
 
-# Kill the Flask server
-echo "🛑 Shutting down Flask app..."
-kill $FLASK_PID
+# Automatically open browser to Render view page
+echo "🌐 Opening flight view page..."
+xdg-open "$VIEW_PAGE" || open "$VIEW_PAGE"
 
-echo "✅ One-time run complete."
+echo "✅ One-time Render test completed."
 

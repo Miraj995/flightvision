@@ -1,12 +1,14 @@
-
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Flight List | FlightVision</title>
-</head>
+<html>
+<head><title>Flight List</title></head>
 <body>
     <h2>Flight Records</h2>
-    <p>🛫 No flight records found. This is a placeholder page for the admin dashboard.</p>
+    <a href="{{ url_for('flight_form') }}">➕ Add New Flight</a>
+    <ul>
+    {% for flight in flights %}
+        <li>{{ flight.flight_number }} - {{ flight.departure }} to {{ flight.arrival }} - {{ flight.status }}</li>
+    {% endfor %}
+    </ul>
 </body>
 </html>
+
