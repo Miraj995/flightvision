@@ -12,6 +12,8 @@ from models.db_models import db, Flight, Advertisement
 # --- INIT APP ---
 app = Flask(__name__)
 app.config.from_object(Config)
+KEY = app.config.get("AVIATIONSTACK_KEY")
+
 
 # --- LOAD .env (for local only, ignored on Render) ---
 load_dotenv()
