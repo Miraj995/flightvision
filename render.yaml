@@ -10,11 +10,11 @@ services:
     autoDeploy: true
     envVars:
       - key: AVIATIONSTACK_KEY
-        sync: true
+        value: 8c60ba3e7890b8c32671106be1753775
       - key: DATABASE_URL
-        sync: true
+        value: postgresql://flightvision_db_user:VqudVy31XoYxLDkwsCQxlkdHIqgOdn9r@dpg-d0monu6mcj7s739gfmm0-a.oregon-postgres.render.com/flightvision_db
       - key: SECRET_KEY
-        sync: true
+        value: flightvision-secret-key
       - key: ICAO_CODE
         value: VABB
-        sync: true
+
