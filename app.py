@@ -140,10 +140,11 @@ def add_ad():
         return redirect(url_for("admin_ads"))
     return render_template("admin/ad_form.html")
 
-@app.before_first_request
+@app.before_serving
 def show_routes():
-    print("🔧 Flask Registered Routes (Runtime):")
+    print("🔧 Registered Routes:")
     print(app.url_map)
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5001, debug=True)
