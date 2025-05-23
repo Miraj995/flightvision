@@ -58,7 +58,10 @@ BASE_URL = "http://api.aviationstack.com/v1"
 if not API_KEY:
     print("❌ API Key not found. Make sure it's in Render ENV variables.")
 else:
-    print("✅ API key loaded successfully.")
+    masked_key = f"{API_KEY[:4]}{'*' * (len(API_KEY) - 8)}{API_KEY[-4:]}"
+    print(f"✅ API key loaded successfully.")
+    print(f"[ENV DEBUG] Key starts with: {API_KEY[:4]}, ends with: {API_KEY[-4:]}, length: {len(API_KEY)}")
+
 
 # --- Cache ---
 cached_data = {
