@@ -53,7 +53,8 @@ class Advertisement(db.Model):
 
 # --- API Key Check ---
 API_KEY = app.config.get("AVIATIONSTACK_KEY")
-BASE_URL = "http://api.aviationstack.com/v1"
+BASE_URL = "https://api.aviationstack.com/v1"
+
 
 if not API_KEY:
     print("❌ API Key not found. Make sure it's in Render ENV variables.")
