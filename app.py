@@ -3,7 +3,23 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from datetime import datetime
 import requests
+import time
 import os
+
+
+def safe_get_with_retry(url, retries=3, delay=2):
+    """Try to GET a URL with retries and delay between attempts."""
+    for attempt in range(retries):
+        try:
+            response = requests.get(url, timeout=10)
+            if response.status_code == 200:
+                return response.json()
+            else:
+                print(f"⚠️ Attempt {attempt + 1} failed: HTTP {response.status_code}")
+        except Exception as e:
+            print(f"❌ Attempt {attempt + 1} exception: {e}")
+        time.sleep(delay)
+    return {}
 
 # --- Load environment vars (Render injects them) ---
 class Config:
@@ -80,9 +96,10 @@ def refresh():
     print("🔄 Refresh triggered")
     for icao in ["VABB"]:
         try:
-            arrivals = requests.get(f"{BASE_URL}/flights?access_key={API_KEY}&arr_icao={icao}").json()
-            departures = requests.get(f"{BASE_URL}/flights?access_key={API_KEY}&dep_icao={icao}").json()
+            arrivals = safe_get_with_retry(f"{BASE_URL}/flights?access_key={API_KEY}&arr_icao={icao}")
+            departures = safe_get_with_retry(f"{BASE_URL}/flights?access_key={API_KEY}&dep_icao={icao}")
             belt_info = []
+
             for flight in arrivals.get("data", []):
                 belt = flight.get("arrival", {}).get("baggage")
                 if belt and belt != "N/A":
@@ -94,7 +111,7 @@ def refresh():
 
             print(f"✅ {icao} refreshed with {len(arrivals.get('data', []))} flights.")
         except Exception as e:
-            print(f"❌ Failed to fetch data: {e}")
+            print(f"❌ Failed after retries: {e}")
 
     return jsonify({"message": "Refreshed", "timestamp": str(datetime.now())})
 
