@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: flightvision-1
+    runtime: python
+    repo: https://github.com/Miraj995/flightvision
+    plan: free
+    region: oregon
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    autoDeploy: true
+    envVars:
+      - key: AVIATIONSTACK_KEY
+        sync: true
+      - key: DATABASE_URL
+        sync: true
+      - key: SECRET_KEY
+        sync: true
+      - key: ICAO_CODE
+        value: VABB
+        sync: true
