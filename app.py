@@ -141,6 +141,8 @@ def add_ad():
     return render_template("admin/ad_form.html")
 
 print("🔧 Registered Routes:\n", app.url_map)
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5001, debug=True)
 
+# Use PORT from environment for compatibility with Render
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=True)
