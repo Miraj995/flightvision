@@ -6,7 +6,7 @@ import requests
 import time
 import os
 
-
+# --- Retry Helper ---
 def safe_get_with_retry(url, retries=3, delay=2):
     """Try to GET a URL with retries and delay between attempts."""
     for attempt in range(retries):
@@ -27,6 +27,7 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = os.getenv("SECRET_KEY")
     AVIATIONSTACK_KEY = os.getenv("AVIATIONSTACK_KEY")
+    ICAO_CODE = os.getenv("ICAO_CODE", "VABB")
 
 # --- App & DB Init ---
 app = Flask(__name__)
@@ -55,14 +56,12 @@ class Advertisement(db.Model):
 API_KEY = app.config.get("AVIATIONSTACK_KEY")
 BASE_URL = "https://api.aviationstack.com/v1"
 
-
 if not API_KEY:
     print("❌ API Key not found. Make sure it's in Render ENV variables.")
 else:
     masked_key = f"{API_KEY[:4]}{'*' * (len(API_KEY) - 8)}{API_KEY[-4:]}"
     print(f"✅ API key loaded successfully.")
     print(f"[ENV DEBUG] Key starts with: {API_KEY[:4]}, ends with: {API_KEY[-4:]}, length: {len(API_KEY)}")
-
 
 # --- Cache ---
 cached_data = {
@@ -98,10 +97,12 @@ def refresh():
         return jsonify({"error": "API key missing."}), 500
 
     print("🔄 Refresh triggered")
-    for icao in ["VABB"]:
+    icao = app.config.get("ICAO_CODE", "VABB")
+    print(f"✈️ Using ICAO code: {icao}")
+    for airport in [icao]:
         try:
-            arrivals = safe_get_with_retry(f"{BASE_URL}/flights?access_key={API_KEY}&arr_icao={icao}")
-            departures = safe_get_with_retry(f"{BASE_URL}/flights?access_key={API_KEY}&dep_icao={icao}")
+            arrivals = safe_get_with_retry(f"{BASE_URL}/flights?access_key={API_KEY}&arr_icao={airport}")
+            departures = safe_get_with_retry(f"{BASE_URL}/flights?access_key={API_KEY}&dep_icao={airport}")
             belt_info = []
 
             for flight in arrivals.get("data", []):
@@ -109,11 +110,11 @@ def refresh():
                 if belt and belt != "N/A":
                     belt_info.append({"flight": flight.get("flight", {}).get("iata"), "belt": belt})
 
-            cached_data["arrivals"][icao] = arrivals
-            cached_data["departures"][icao] = departures
-            cached_data["belt"][icao] = {"belt_info": belt_info}
+            cached_data["arrivals"][airport] = arrivals
+            cached_data["departures"][airport] = departures
+            cached_data["belt"][airport] = {"belt_info": belt_info}
 
-            print(f"✅ {icao} refreshed with {len(arrivals.get('data', []))} flights.")
+            print(f"✅ {airport} refreshed with {len(arrivals.get('data', []))} flights.")
         except Exception as e:
             print(f"❌ Failed after retries: {e}")
 
@@ -163,7 +164,6 @@ def add_ad():
 
 print("🔧 Registered Routes:\n", app.url_map)
 
-# Use PORT from environment for compatibility with Render
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port, debug=True)

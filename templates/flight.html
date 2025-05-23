@@ -41,6 +41,15 @@
             font-weight: bold;
             margin-top: 20px;
         }
+        .refresh-link {
+            margin-bottom: 20px;
+            display: inline-block;
+            background: #3498db;
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
@@ -48,6 +57,8 @@
     <div class="clock">
         🕒 Current Time: <span id="clock">Loading...</span>
     </div>
+
+    <a href="/refresh" class="refresh-link">🔄 Refresh Now</a>
 
     <script>
         function updateClock() {
