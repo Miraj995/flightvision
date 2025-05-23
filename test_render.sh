@@ -1,39 +1,45 @@
 #!/bin/bash
 
-# === CONFIG ===
+# ========== CONFIGURATION ==========
 RENDER_URL="https://flightvision.onrender.com"
 REFRESH_ENDPOINT="$RENDER_URL/refresh"
 VIEW_PAGE="$RENDER_URL/view"
-FLIGHT_LIST_PAGE="$RENDER_URL/admin/flights"
-FLIGHT_FORM_PAGE="$RENDER_URL/admin/flights/new"
-AD_LIST_PAGE="$RENDER_URL/admin/ads"
-AD_FORM_PAGE="$RENDER_URL/admin/ads/new"
 
-# Optional DB creds
+# Optional Postgres credentials
 DB_USER="flightvision_db_user"
 DB_NAME="flightvision_db"
 DB_HOST="dpg-d0monu6mcj7s739gfmm0-a.oregon-postgres.render.com"
-DB_PASS="VqudVy31XoYxLDkwsCQxlkdHIqgOdn9r"
+DB_PASS="VqudVy31XoYxLDkwsCQxlkdHIqgOdn9r"  # Private: do not commit
 
+# ========== 1. TRIGGER MANUAL REFRESH ==========
 echo "🔄 Triggering /refresh ..."
 curl -s "$REFRESH_ENDPOINT"
 echo -e "\n✅ Refresh triggered."
 
-# Optional: print DB rows (you need psql installed)
-echo "📦 Flight DB entries:"
-PGPASSWORD=$DB_PASS psql -h $DB_HOST -U $DB_USER -d $DB_NAME -c "SELECT * FROM flight;" 2>/dev/null
+# ========== 2. CHECK ROUTES ==========
+echo -e "\n🔎 Testing route availability (status codes):"
+ENDPOINTS=(
+  "/view"
+  "/admin/flights"
+  "/admin/flights/new"
+  "/admin/ads"
+  "/admin/ads/new"
+)
 
-echo "📺 Ad DB entries:"
-PGPASSWORD=$DB_PASS psql -h $DB_HOST -U $DB_USER -d $DB_NAME -c "SELECT * FROM advertisement;" 2>/dev/null
+for ENDPOINT in "${ENDPOINTS[@]}"; do
+    FULL_URL="$RENDER_URL$ENDPOINT"
+    STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$FULL_URL")
+    echo "$STATUS  ←  $ENDPOINT"
+done
 
-# === OPEN RENDER PAGES ===
-echo "🌐 Opening all Render URLs in browser..."
-xdg-open "$VIEW_PAGE" >/dev/null 2>&1 || open "$VIEW_PAGE"
-xdg-open "$FLIGHT_LIST_PAGE" >/dev/null 2>&1 || open "$FLIGHT_LIST_PAGE"
-xdg-open "$FLIGHT_FORM_PAGE" >/dev/null 2>&1 || open "$FLIGHT_FORM_PAGE"
-xdg-open "$AD_LIST_PAGE" >/dev/null 2>&1 || open "$AD_LIST_PAGE"
-xdg-open "$AD_FORM_PAGE" >/dev/null 2>&1 || open "$AD_FORM_PAGE"
+# ========== 3. OPTIONAL DB TESTS ==========
+echo -e "\n🛢️ Checking DB for records..."
+PGPASSWORD=$DB_PASS psql -h $DB_HOST -U $DB_USER -d $DB_NAME -c "SELECT COUNT(*) FROM flight;"
+PGPASSWORD=$DB_PASS psql -h $DB_HOST -U $DB_USER -d $DB_NAME -c "SELECT COUNT(*) FROM advertisement;"
 
-echo "✅ All tests executed. UI and DB refreshed."
+# ========== 4. OPEN MAIN VIEW ==========
+echo -e "\n🌐 Opening flight info page..."
+xdg-open "$VIEW_PAGE" || open "$VIEW_PAGE"
 
+echo -e "\n✅ Render test complete.\n"
 

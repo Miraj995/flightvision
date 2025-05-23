@@ -1,12 +1,50 @@
 <!DOCTYPE html>
-<html>
-<head><title>Departures</title></head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Departures | FlightVision</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; background-color: #f9f9f9; }
+        h2 { color: #2c3e50; }
+        table { border-collapse: collapse; width: 100%; background: white; }
+        th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
+        th { background-color: #ffe6e6; }
+        .clock { font-size: 18px; margin-bottom: 20px; color: #555; }
+        .no-data { color: #c00; font-weight: bold; }
+    </style>
+</head>
 <body>
-    <h2>Departing Flights</h2>
-    <ul>
-    {% for flight in flights %}
-        <li>{{ flight.flight_number }} to {{ flight.arrival }} - {{ flight.status }}</li>
-    {% endfor %}
-    </ul>
+    <h2>Live Departures</h2>
+    <div class="clock">🕒 Current Time: <span id="clock">Loading...</span></div>
+
+    <script>
+    function updateClock() {
+        const now = new Date();
+        document.getElementById('clock').textContent = now.toLocaleTimeString();
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+    </script>
+
+    {% if departures %}
+        <table>
+            <tr>
+                <th>Flight</th>
+                <th>To</th>
+                <th>Status</th>
+                <th>Gate</th>
+            </tr>
+            {% for item in departures %}
+            <tr>
+                <td>{{ item.flight }}</td>
+                <td>{{ item.to }}</td>
+                <td>{{ item.status }}</td>
+                <td>{{ item.gate or "N/A" }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p class="no-data">No departures data available.</p>
+    {% endif %}
 </body>
 </html>

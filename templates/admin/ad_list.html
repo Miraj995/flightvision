@@ -1,15 +1,61 @@
 <!DOCTYPE html>
-<html>
-<head><title>Ad List</title></head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Advertisement List | Admin</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .add-button {
+            display: inline-block;
+            margin-bottom: 10px;
+            padding: 6px 12px;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+    </style>
+</head>
 <body>
-    <h2>Advertisements</h2>
-    <a href="{{ url_for('ad_form') }}">➕ Add New Advertisement</a>
-    <ul>
-    {% for ad in ads %}
-        <li>{{ ad.title }} - {{ ad.media_type }} - <a href="{{ ad.media_url }}" target="_blank">View</a></li>
-    {% endfor %}
-    </ul>
+    <h2>Advertisement Records</h2>
+
+    <a href="{{ url_for('add_ad') }}" class="add-button">➕ Add New Advertisement</a>
+
+    {% if ads %}
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Media Type</th>
+                <th>Preview</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ad in ads %}
+            <tr>
+                <td>{{ ad.title }}</td>
+                <td>{{ ad.media_type }}</td>
+                <td><a href="{{ ad.media_url }}" target="_blank">View</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>No advertisements available.</p>
+    {% endif %}
 </body>
 </html>
-
-

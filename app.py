@@ -139,7 +139,7 @@ def add_ad():
         db.session.commit()
         return redirect(url_for("admin_ads"))
     return render_template("admin/ad_form.html")
-
-# --- Run ---
+    
+print("🔧 Registered Routes:\n", app.url_map)
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5001, debug=True)

@@ -7,54 +7,55 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f9f9f9;
+            margin: 30px;
+            background-color: #f7f7f7;
         }
         h2 {
-            color: #333;
+            color: #2c3e50;
+        }
+        .clock {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #666;
         }
         table {
             border-collapse: collapse;
             width: 100%;
-            background-color: white;
+            background-color: #fff;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
         }
         th, td {
-            border: 1px solid #ccc;
-            padding: 8px;
+            border: 1px solid #ddd;
+            padding: 10px;
             text-align: left;
         }
         th {
-            background-color: #e6f2ff;
+            background-color: #dff0f7;
+            color: #333;
         }
-        .timestamp {
-            font-size: 18px;
-            margin-bottom: 10px;
-            color: #555;
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
         }
         .no-data {
-            color: #c00;
+            color: #c0392b;
             font-weight: bold;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
     <h2>Live Flight Data</h2>
-    <div class="timestamp">
+    <div class="clock">
         🕒 Current Time: <span id="clock">Loading...</span>
     </div>
 
     <script>
-    function updateClock() {
-        const now = new Date();
-        const formatted = now.toLocaleTimeString('en-IN', {
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit'
-        });
-        document.getElementById('clock').textContent = formatted;
-    }
-    setInterval(updateClock, 1000);
-    updateClock();
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('clock').textContent = now.toLocaleTimeString();
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
     </script>
 
     {% if flights and flights|length > 0 %}

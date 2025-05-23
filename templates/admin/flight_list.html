@@ -1,14 +1,67 @@
 <!DOCTYPE html>
-<html>
-<head><title>Flight List</title></head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flight Records | Admin</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .add-button {
+            display: inline-block;
+            margin-bottom: 10px;
+            padding: 6px 12px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+    </style>
+</head>
 <body>
     <h2>Flight Records</h2>
-    <a href="{{ url_for('flight_form') }}">➕ Add New Flight</a>
-    <ul>
-    {% for flight in flights %}
-        <li>{{ flight.flight_number }} - {{ flight.departure }} to {{ flight.arrival }} - {{ flight.status }}</li>
-    {% endfor %}
-    </ul>
+
+    <a href="{{ url_for('add_flight') }}" class="add-button">➕ Add New Flight</a>
+
+    {% if flights %}
+    <table>
+        <thead>
+            <tr>
+                <th>Flight Number</th>
+                <th>Departure</th>
+                <th>Arrival</th>
+                <th>Status</th>
+                <th>Gate</th>
+                <th>Baggage Belt</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for flight in flights %}
+            <tr>
+                <td>{{ flight.flight_number }}</td>
+                <td>{{ flight.departure }}</td>
+                <td>{{ flight.arrival }}</td>
+                <td>{{ flight.status }}</td>
+                <td>{{ flight.gate or 'N/A' }}</td>
+                <td>{{ flight.baggage_belt or 'N/A' }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>No flight records found.</p>
+    {% endif %}
 </body>
 </html>
-

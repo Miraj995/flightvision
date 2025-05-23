@@ -1,17 +1,47 @@
 <!DOCTYPE html>
-<html>
-<head><title>Add Flight</title></head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Flight</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        form { max-width: 400px; }
+        label { display: block; margin-top: 12px; }
+        input { width: 100%; padding: 8px; margin-top: 4px; }
+        button {
+            margin-top: 20px;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+        }
+        a { display: block; margin-top: 20px; }
+    </style>
+</head>
 <body>
     <h2>Add New Flight</h2>
     <form method="POST">
-        Flight Number: <input type="text" name="flight_number" required><br><br>
-        Status: <input type="text" name="status" required><br><br>
-        Arrival: <input type="text" name="arrival" required><br><br>
-        Departure: <input type="text" name="departure" required><br><br>
-        Gate: <input type="text" name="gate"><br><br>
-        Baggage Belt: <input type="text" name="baggage_belt"><br><br>
-        <button type="submit">Submit</button>
+        <label for="flight_number">Flight Number:</label>
+        <input type="text" name="flight_number" required>
+
+        <label for="status">Status:</label>
+        <input type="text" name="status" required>
+
+        <label for="arrival">Arrival Airport:</label>
+        <input type="text" name="arrival" required>
+
+        <label for="departure">Departure Airport:</label>
+        <input type="text" name="departure" required>
+
+        <label for="gate">Gate:</label>
+        <input type="text" name="gate">
+
+        <label for="baggage_belt">Baggage Belt:</label>
+        <input type="text" name="baggage_belt">
+
+        <button type="submit">Save Flight</button>
     </form>
-    <a href="{{ url_for('flight_list') }}">Back to Flight List</a>
+    <a href="{{ url_for('admin_flights') }}">⬅ Back to Flight List</a>
 </body>
 </html>
